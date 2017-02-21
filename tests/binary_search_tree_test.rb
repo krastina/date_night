@@ -10,14 +10,14 @@ class TreeTest < Minitest::Test
         assert_equal nil, tree.root.score
     end
 
-    def test_inserting_into_a_tree_populates_root_values
+    def test_inserting_into_a_new_tree_populates_root_values
         tree = BinarySearchTree.new
         tree.insert(61, "Bill & Ted's Excellent Adventure")
         refute_equal nil, tree.root
         assert_equal 61, tree.root.score
     end
 
-    def test_inserting_a_left_and_a_right_branch_into_root
+    def test_can_insert_a_left_and_a_right_node_into_root
         tree = BinarySearchTree.new
         tree.insert(61, "Bill & Ted's Excellent Adventure")
         tree.insert(16, "Johnny English")
@@ -27,7 +27,7 @@ class TreeTest < Minitest::Test
         refute_equal nil, tree.root.right
     end
 
-    def test_determine_if_include_inserted_value
+    def test_can_determine_if_include_value
         tree = BinarySearchTree.new
         tree.insert(61, "Bill & Ted's Excellent Adventure")
         tree.insert(16, "Johnny English")
@@ -131,4 +131,4 @@ class TreeTest < Minitest::Test
         assert tree.leaves
     end
 
-end 
+end
