@@ -5,17 +5,16 @@ require_relative '../lib/binary_search_tree'
 
 class TreeTest < Minitest::Test
 
-    def test_new_tree_root_is_nil
+    def test_new_tree_root_is_nil_for_score
         tree = BinarySearchTree.new
         assert_equal nil, tree.root.score
     end
 
-    def test_inserting_into_a_tree_creates_root
+    def test_inserting_into_a_tree_populates_root_values
         tree = BinarySearchTree.new
         tree.insert(61, "Bill & Ted's Excellent Adventure")
         refute_equal nil, tree.root
         assert_equal 61, tree.root.score
-        #assert_equal 0, tree.depth_of(@root)
     end
 
     def test_inserting_a_left_and_a_right_branch_into_root
@@ -28,7 +27,7 @@ class TreeTest < Minitest::Test
         refute_equal nil, tree.root.right
     end
 
-    def test_include_inserted_value
+    def test_determine_if_include_inserted_value
         tree = BinarySearchTree.new
         tree.insert(61, "Bill & Ted's Excellent Adventure")
         tree.insert(16, "Johnny English")
@@ -36,7 +35,7 @@ class TreeTest < Minitest::Test
         refute tree.include?(15)
     end
 
-    def test_depth_of
+    def test_can_find_depth_of
         tree = BinarySearchTree.new
         tree.insert(61, "Bill & Ted's Excellent Adventure")
         tree.insert(16, "Johnny English")
@@ -47,7 +46,7 @@ class TreeTest < Minitest::Test
         assert_equal 2, tree.depth_of(50)
     end
 
-    def test_max
+    def test_can_find_max
         tree = BinarySearchTree.new
         tree.insert(61, "Bill & Ted's Excellent Adventure")
         tree.insert(16, "Johnny English")
@@ -57,7 +56,7 @@ class TreeTest < Minitest::Test
         assert_equal "Sharknado 3", tree.max.keys.first
     end
 
-    def test_min
+    def test_can_find_min
         tree = BinarySearchTree.new
         tree.insert(61, "Bill & Ted's Excellent Adventure")
         tree.insert(16, "Johnny English")
@@ -67,7 +66,7 @@ class TreeTest < Minitest::Test
         assert_equal "Johnny English", tree.min.keys.first
     end
 
-    def test_sort
+    def test_can_sort_tree
         tree = BinarySearchTree.new
         tree.insert(61, "Bill & Ted's Excellent Adventure")
         tree.insert(16, "Johnny English")
@@ -77,7 +76,7 @@ class TreeTest < Minitest::Test
         assert_equal 92, tree.sort.last.values.last
     end
 
-    def test_count_nodes
+    def test_can_count_nodes
         tree = BinarySearchTree.new
         tree.insert(61, "Bill & Ted's Excellent Adventure")
         tree.insert(16, "Johnny English")
@@ -86,7 +85,7 @@ class TreeTest < Minitest::Test
         assert_equal 4, tree.count_nodes
     end
 
-    def test_health
+    def test_can_generate_health_report
         tree = BinarySearchTree.new
         tree.insert(98, "Animals United")
         tree.insert(58, "Armageddon")
@@ -100,7 +99,7 @@ class TreeTest < Minitest::Test
         assert_equal [[36, 2, 28], [93, 3, 42]], tree.health(2)
     end
 
-    def test_leaves
+    def test_can_count_leaves
         tree = BinarySearchTree.new
         tree.insert(98, "Animals United")
         tree.insert(58, "Armageddon")
@@ -112,7 +111,7 @@ class TreeTest < Minitest::Test
         assert_equal 2, tree.leaves
     end
 
-    def test_height
+    def test_can_calculate_height
         tree = BinarySearchTree.new
         tree.insert(98, "Animals United")
         tree.insert(58, "Armageddon")
@@ -124,4 +123,12 @@ class TreeTest < Minitest::Test
         assert_equal 5, tree.height
     end
 
-end
+    def can_load_tree_from_file
+        tree = BinarySearchTree.new
+        tree.load('movies.txt')
+        assert tree.sort
+        assert_equal 100, tree.count_nodes
+        assert tree.leaves
+    end
+
+end 
