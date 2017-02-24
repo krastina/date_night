@@ -1,36 +1,29 @@
 class Node
 
-  attr_accessor :data,
-                :left,
+  attr_reader   :left,
                 :right,
+                :data,
+                :title,
+                :score,
                 :depth
 
-  def initialize(score, title)
+  def initialize(score, title, depth = 0)
     @data = {title => score}
-    @left = nil
-    @right = nil
-    @depth = 0
-  end
-
-  def score
-      data.values.first
-  end
-
-  def title
-      data.keys.first
+    @score = score
+    @title = title
+    @depth = depth
   end
 
   def insert(new_score, new_title)
-    new_node = Node.new(new_score, new_title)
-    if new_node.score < score && left.nil?
-      self.left = new_node
-      left.depth = depth + 1
-    elsif new_node.score < score
+    if new_score < score && left.nil?
+      @left = Node.new(new_score, new_title, depth = (self.depth + 1))
+      return @left.depth
+    elsif new_score < score
       left.insert(new_score, new_title)
-    elsif new_node.score > score && right.nil?
-      self.right = new_node
-      right.depth = depth + 1
-    elsif new_node.score > score
+    elsif new_score > score && right.nil?
+      @right = Node.new(new_score, new_title, depth = (self.depth + 1))
+      return @right.depth
+    elsif new_score > score
       right.insert(new_score, new_title)
     else
       "Score exists! It will be ignored"
