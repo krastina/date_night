@@ -1,8 +1,7 @@
 require_relative "binary_search_tree"
 
 tree = BinarySearchTree.new
-puts "Loading binary search tree from file!"
-tree.load('movies.txt')
+
 
 puts "Welcome to date night!"
 puts "Type 'commands' to see available tree methods."
@@ -34,7 +33,7 @@ until input == "quit"
             puts "Total tree leaves: #{tree.leaves}"
         when "load"
             puts "Please provide file to be loaded: "
-            file = gets.chomp
+            file = gets.chomp.to_s
             puts "Total titles loaded: #{tree.load(file)}"
         when "max"
             puts "Maximum tree value is: #{tree.max}"
